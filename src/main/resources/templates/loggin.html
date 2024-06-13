@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Calendar | Login</title>
+    <!-- Fuentes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <!-- Estilos -->
+    <link rel="stylesheet" th:href="@{/css/styles-login.css}">
 </head>
 <body>
+<div class="container" id="container">
+    <div class="form-container sign-up">
+        <form method="POST">
+            <h1>Crea una Cuenta</h1>
+            <input type="text" placeholder="Nombre" autocomplete="off"/>
+            <input type="email" placeholder="Email" autocomplete="off"/>
+            <input type="password" placeholder="Contraseña" autocomplete="off"/>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
 
+    <div class="form-container sign-in">
+        <form method="POST" th:action="@{/logginprocess}">
+            <h1>¡Bienvenido!</h1>
+
+            <input type="text" placeholder="Usuario" name="username" autocomplete="off"/>
+            <input type="password" placeholder="Contraseña" name="password" autocomplete="off"/>
+            <a href="#" style="text-decoration: underline;">Olvidaste tu Contraseña?</a>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <h1>¡Bienvenido de nuevo!</h1>
+                <p>Ingresa tus datos para utilizar todas las funciones del sitio</p>
+                <button class="hidden" id="login">Iniciar Sesión</button>
+            </div>
+
+            <div class="toggle-panel toggle-right">
+                <h1>¿Aun no tienes una cuenta?</h1>
+                <p>
+                    Regístrate para utilizar todas las funciones del sitio
+                </p>
+                <button class="hidden" id="register">Registrarse</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{js/app-login.js}"></script>
 </body>
 </html>

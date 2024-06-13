@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar Ease</title>
+    <!-- Bootstrap V5.3.3 -->
+    <link rel="stylesheet" th:href="@{/bootstrap_5_3_3/css/bootstrap.min.css}">
+    <!-- JQuery V3.7.1 -->
+    <script th:src="@{/jquery_3_7_1/jquery.js}"></script>
+</head>
+<body>
+<div class="container text-center">
+    <h1> Panel Principal</h1> <br><br>
+</div>
+<!--No es necesario crear una ruta, la ruta "/logout" ya la tiene Spring Security-->
+<div class="container">
+    <form th:action="@{/logout}" method="POST" id="logout-form">
+        <a onclick="document.getElementById('logout-form').submit();" class="btn btn-success">Logout</a>
+    </form>
+</div>
+<script>
+    console.log($);
+</script>
+</body>
+</html>
