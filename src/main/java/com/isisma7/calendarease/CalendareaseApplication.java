@@ -1,8 +1,8 @@
 package com.isisma7.calendarease;
 
+import java.util.List;
 import java.util.Set;
 
-import org.hibernate.mapping.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -55,8 +55,34 @@ public class CalendareaseApplication {
 					.paciente(null)
                     .build();
 
+				// Crear el usuario con el rol de desarrollador
+				Usuario userDoc = Usuario.builder()
+					.nombreUsuario("calendar.doc")
+					.pass(new BCryptPasswordEncoder().encode("cal$987.doc#123")) // Encriptar la contraseña
+					.isEnabled(true)
+					.accountNoExpired(true)
+					.accountNoLocked(true)
+					.credentialNoExpired(true)
+					.roles(Set.of(rolDoc))
+					.medico(null)
+					.paciente(null)
+					.build();
+
+				// Crear el usuario con el rol de desarrollador
+				Usuario userPac = Usuario.builder()
+					.nombreUsuario("calendar.pac")
+					.pass(new BCryptPasswordEncoder().encode("cal$987.pac#123")) // Encriptar la contraseña
+					.isEnabled(true)
+					.accountNoExpired(true)
+					.accountNoLocked(true)
+					.credentialNoExpired(true)
+					.roles(Set.of(rolPac))
+					.medico(null)
+					.paciente(null)
+					.build();
+
 				// Guardar todos los usuarios
-				usuarioRepository.save(userDev);
+				usuarioRepository.saveAll(List.of(userDev, userDoc, userPac));
         };
     }
 

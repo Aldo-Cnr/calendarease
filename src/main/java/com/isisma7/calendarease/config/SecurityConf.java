@@ -1,9 +1,17 @@
 package com.isisma7.calendarease.config;
 
+import com.isisma7.calendarease.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -23,8 +31,8 @@ public class SecurityConf {
                         // Lectura de recursos estaticos (css, js)
                         .requestMatchers("/css/**", "/js/**", "/bootstrap_5_3_3/**", "/jquery_3_7_1/**").permitAll()
                         .requestMatchers("/", "index", "/loggin").permitAll() // Primera vista para todos
-                        /*.requestMatchers("/ayuda").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/home").hasAnyRole("DEV", "DOC", "PAC")
+                        /*.requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/basic/**").hasRole("USER")*/
                         .anyRequest().authenticated()
                 )
@@ -48,5 +56,32 @@ public class SecurityConf {
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new SimpleUrlAuthenticationSuccessHandler("/home");
+    }
+
+    /*Un administrador de autenticacion (authenticationManager)*/
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    /*Proveedero de autenticacion, en este caso de una base de datos (Authentication Provider)*/
+    @Bean
+    public AuthenticationProvider authenticationProvider(UserDetailsServiceImpl userDetailsService) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        // Contraseña encriptada
+        provider.setPasswordEncoder(passwordEncoder());
+        // Usuario de Conexion
+        provider.setUserDetailsService(userDetailsService);
+
+        return provider;
+    }
+
+    /*Contraseñas que se mandan al autenticador*/
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        // Encriptado
+        return new BCryptPasswordEncoder();
+        // NO encriptado
+        // return NoOpPasswordEncoder.getInstance();
     }
 }

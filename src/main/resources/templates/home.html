@@ -12,6 +12,12 @@
 <div class="container text-center">
     <h1> Panel Principal</h1> <br><br>
 </div>
+<!-- Verificar si hay autentyicacion -->
+<div sec:authorize="isAuthenticated()" style="font-size: 16px;">
+    <p><span>Sesion: </span><span th:text="${DataUser}"></span></p>
+    <p><span>Usuario: </span><span sec:authentication="name"></span></p>
+    <p><span>Roles: </span><span sec:authentication="principal.authorities"></span></p>
+</div>
 <!--No es necesario crear una ruta, la ruta "/logout" ya la tiene Spring Security-->
 <div class="container">
     <form th:action="@{/logout}" method="POST" id="logout-form">
