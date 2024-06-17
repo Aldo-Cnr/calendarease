@@ -45,7 +45,7 @@ public class CalendareaseApplication {
                 // Crear el usuario con el rol de desarrollador
                 Usuario userDev = Usuario.builder()
                     .nombreUsuario("calendar.dev")
-                    .pass(new BCryptPasswordEncoder().encode("cal$987.dev#123")) // Encriptar la contraseña
+						.pass(new BCryptPasswordEncoder().encode("cal$987.dev#123")) // Encriptar la contraseña
                     .isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)

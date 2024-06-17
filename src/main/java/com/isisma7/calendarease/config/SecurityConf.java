@@ -13,7 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -41,11 +43,12 @@ public class SecurityConf {
                         .loginPage("/loggin") // A donde se va el login
                         .loginProcessingUrl("/logginprocess") // Donde se deliega el procesamiento de la aplicacion
                         .successHandler(myAuthenticationSuccessHandler()) // A donde redireige el exito de logeo
+                        .failureHandler(myAuthenticationFailureHandler()) // Redireccion en caso de fallo
                         .permitAll()
 
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/loggin?logout") // A donde redirecciona el cierre de sesion
+                        .logoutSuccessUrl("/loggin?logout=true") // A donde redirecciona el cierre de sesion
                         .permitAll()
                 );
 
@@ -56,6 +59,12 @@ public class SecurityConf {
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new SimpleUrlAuthenticationSuccessHandler("/home");
+    }
+
+    // Redireccion en caso de fallo
+    @Bean
+    public AuthenticationFailureHandler myAuthenticationFailureHandler() {
+        return new SimpleUrlAuthenticationFailureHandler("/loggin?error=true");
     }
 
     /*Un administrador de autenticacion (authenticationManager)*/

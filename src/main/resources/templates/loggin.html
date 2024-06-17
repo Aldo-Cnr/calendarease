@@ -5,51 +5,58 @@
     <title>Calendar | Login</title>
     <!-- Fuentes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- JQuery V3.7.1 -->
+    <script th:src="@{/jquery_3_7_1/jquery.js}"></script>
     <!-- Estilos -->
     <link rel="stylesheet" th:href="@{/css/styles-login.css}">
 </head>
-<body>
-<div class="container" id="container">
-    <div class="form-container sign-up">
-        <form method="POST">
-            <h1>Crea una Cuenta</h1>
-            <input type="text" placeholder="Nombre" autocomplete="off"/>
-            <input type="email" placeholder="Email" autocomplete="off"/>
-            <input type="password" placeholder="Contraseña" autocomplete="off"/>
-            <button type="submit">Registrarse</button>
-        </form>
-    </div>
+<body style="height: 100vh !important;">
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form method="POST">
+                <h1>Crea una Cuenta</h1>
+                <input type="text" placeholder="Nombre" autocomplete="off"/>
+                <input type="email" placeholder="Email" autocomplete="off"/>
+                <input type="password" placeholder="Contraseña" autocomplete="off"/>
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
 
-    <div class="form-container sign-in">
-        <form method="POST" th:action="@{/logginprocess}">
-            <h1>¡Bienvenido!</h1>
+        <div class="form-container sign-in">
+            <form method="POST" th:action="@{/logginprocess}">
+                <h1>¡Bienvenido!</h1>
 
-            <input type="text" placeholder="Usuario" name="username" autocomplete="off"/>
-            <input type="password" placeholder="Contraseña" name="password" autocomplete="off"/>
-            <a href="#" style="text-decoration: underline;">Olvidaste tu Contraseña?</a>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-    </div>
+                <input type="text" placeholder="Usuario" name="username" autocomplete="off"/>
+                <input type="password" placeholder="Contraseña" name="password" autocomplete="off"/>
+                <a href="#" style="text-decoration: underline;">Olvidaste tu Contraseña?</a>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
 
-    <div class="toggle-container">
-        <div class="toggle">
-            <div class="toggle-panel toggle-left">
-                <h1>¡Bienvenido de nuevo!</h1>
-                <p>Ingresa tus datos para utilizar todas las funciones del sitio</p>
-                <button class="hidden" id="login">Iniciar Sesión</button>
-            </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>¡Bienvenido de nuevo!</h1>
+                    <p>Ingresa tus datos para utilizar todas las funciones del sitio</p>
+                    <button class="hidden" id="login">Iniciar Sesión</button>
+                </div>
 
-            <div class="toggle-panel toggle-right">
-                <h1>¿Aun no tienes una cuenta?</h1>
-                <p>
-                    Regístrate para utilizar todas las funciones del sitio
-                </p>
-                <button class="hidden" id="register">Registrarse</button>
+                <div class="toggle-panel toggle-right">
+                    <h1>¿Aun no tienes una cuenta?</h1>
+                    <p>
+                        Regístrate para utilizar todas las funciones del sitio
+                    </p>
+                    <button class="hidden" id="register">Registrarse</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.all.min.js"></script>
+<!-- Comportamiento -->
 <script th:src="@{js/app-login.js}"></script>
 </body>
 </html>
