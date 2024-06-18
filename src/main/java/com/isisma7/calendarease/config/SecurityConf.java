@@ -31,7 +31,9 @@ public class SecurityConf {
 
         http.authorizeHttpRequests((authorize) -> authorize // Zona de filtros
                         // Lectura de recursos estaticos (css, js)
-                        .requestMatchers("/css/**", "/js/**", "/bootstrap_5_3_3/**", "/jquery_3_7_1/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**",
+                                "/bootstrap_5_3_3/**", "/jquery_3_7_1/**",
+                                "/sweetalert2/**").permitAll()
                         .requestMatchers("/", "index", "/loggin").permitAll() // Primera vista para todos
                         .requestMatchers("/home").hasAnyRole("DEV", "DOC", "PAC")
                         /*.requestMatchers("/admin").hasRole("ADMIN")

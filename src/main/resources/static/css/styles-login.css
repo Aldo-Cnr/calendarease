@@ -199,6 +199,22 @@ body{
     transform: translateX(200%);
 }
 
+/* Estilo personalizado para el botón de confirmación */
+.custom-confirm-button {
+    background-color: rgb(45, 160, 168) !important;
+    color: white !important; /* Para que el texto sea visible */
+}
+/* Estilos de campo requerido */
+input.error{
+    border: 1px solid red;
+}
+.error{
+    color:red;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+}
+
 
 
 /* Media query para pantallas de menos de 800px */
